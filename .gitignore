@@ -1,1 +1,7 @@
+.idea
 .vscode
+
+*.mod
+*.exe
+
+codes/PBFT/Keys
