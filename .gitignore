@@ -1,6 +1,9 @@
 .idea
 .vscode
 
+bin
+out
+
 *.mod
 *.exe
 

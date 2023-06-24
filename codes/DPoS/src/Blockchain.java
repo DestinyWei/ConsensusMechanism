@@ -44,8 +44,7 @@ public class Blockchain {
         private int nonce;
 
         // 构造函数
-        public Block(int index, long timestamp, List<Transaction> transactionList, List<Vote> voteList,
-                String previousHash, int nonce) {
+        public Block(int index, long timestamp, List<Transaction> transactionList, List<Vote> voteList, String previousHash, int nonce) {
             this.index = index;
             this.timestamp = timestamp;
             this.transactionList = transactionList;
@@ -299,6 +298,7 @@ public class Blockchain {
         int nonce = 0;
         Block genesisBlock = new Block(0, System.currentTimeMillis(), transactions, votes, previousHash, nonce);
         blockList.add(genesisBlock);
+        System.out.println("genesisBlock: " + genesisBlock.hash);
     }
 
     // 添加交易
@@ -334,8 +334,7 @@ public class Blockchain {
     public boolean validate() {
         List<Block> blockList = getBlockList();
         for (int i = 1; i < blockList.size(); i++) {
-            Block currentBlock = blockList.get(i);
-            Block previousBlock = blockList.get(i - 1);
+            Block currentBlock = blockList.get(i);Block previousBlock = blockList.get(i - 1);
             if (!currentBlock.validate() || !currentBlock.getPreviousHash().equals(previousBlock.hash)) {
                 return false;
             }
