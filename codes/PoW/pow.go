@@ -10,20 +10,20 @@ import (
 )
 
 var (
-	//Nonce循环上限
+	// Nonce循环上限
 	maxNonce = math.MaxInt64
 )
 
-//难度值
+// 难度值
 const targetBits = 24
 
-//pow结构
+// ProofOfWork pow结构
 type ProofOfWork struct {
 	block  *Block
 	target *big.Int
 }
 
-//创建pow结构
+// NewProofOfWork 创建pow结构
 func NewProofOfWork(b *Block) *ProofOfWork {
 	//target为最终难度值
 	target := big.NewInt(1)
@@ -34,7 +34,7 @@ func NewProofOfWork(b *Block) *ProofOfWork {
 	return pow
 }
 
-//挖矿运行
+// Run 挖矿运行
 func (pow *ProofOfWork) Run() (int, []byte) {
 	var hashInt big.Int
 	var hash [32]byte
@@ -60,7 +60,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	return nonce, hash[:]
 }
 
-//准备数据
+// prepareData 准备数据
 func (pow *ProofOfWork) prepareData(nonce int64) []byte {
 	data := bytes.Join(
 		[][]byte{
@@ -76,14 +76,14 @@ func (pow *ProofOfWork) prepareData(nonce int64) []byte {
 	return data
 }
 
-//将int64写入[]byte
+// Int2Hex 将int64写入[]byte
 func Int2Hex(num int64) []byte {
 	buff := new(bytes.Buffer)
 	binary.Write(buff, binary.BigEndian, num)
 	return buff.Bytes()
 }
 
-//校验区块正确性
+// Validate 校验区块正确性
 func (pow *ProofOfWork) Validate() bool {
 	var hashInt big.Int
 	data := pow.prepareData(pow.block.Nonce)
