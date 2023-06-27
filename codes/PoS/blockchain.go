@@ -15,7 +15,7 @@ const (
 	Minute      = 60
 )
 
-// 创建一种名为Block的结构体,包含区块哈希，前区块哈希，区块号，难度值，矿工地址，奖励币数，时间戳
+// Block 创建一种名为Block的结构体,包含区块哈希，前区块哈希，区块号，难度值，矿工地址，奖励币数，时间戳
 type Block struct {
 	Hash      []byte
 	PrevHash  []byte
@@ -27,16 +27,14 @@ type Block struct {
 	tradeData string
 }
 
-// 初始化函数，生成创世区块，并添加到区块链中
-
+// InitBlockChain 初始化函数，生成创世区块，并添加到区块链中
 func InitBlockChain(Miners []Miner, Coins []Coin) []Block {
 	var bc []Block
 	bc = append(bc, GenesisBlock(Miners, Coins))
 	return bc
 }
 
-// 生成创世区块，默认难度值为1，矿工地址为矿工数组0
-
+// GenesisBlock 生成创世区块，默认难度值为1，矿工地址为矿工数组0
 func GenesisBlock(Miners []Miner, Coins []Coin) Block {
 	temp := sha256.Sum256([]byte("Genesis Block"))
 	genesisBlock := Block{
@@ -52,7 +50,7 @@ func GenesisBlock(Miners []Miner, Coins []Coin) Block {
 	return genesisBlock
 }
 
-// 生成区块函数，传入参数为矿工序号，矿工数组，Coin,tradeData,区块数组,新区块的Hash是tradeData的sha256的运算结果，PrevHash是上一个区块的哈希，区块号是上一个区块的区块号加1，难度值是上一个区块的难度值，矿工地址是矿工数组中对应序号的地址，奖励币数是Coin，时间戳是当前时间戳，将新生成的区块添加到区块数组中
+// GenerateBlock 生成区块函数，传入参数为矿工序号，矿工数组，Coin,tradeData,区块数组,新区块的Hash是tradeData的sha256的运算结果，PrevHash是上一个区块的哈希，区块号是上一个区块的区块号加1，难度值是上一个区块的难度值，矿工地址是矿工数组中对应序号的地址，奖励币数是Coin，时间戳是当前时间戳，将新生成的区块添加到区块数组中
 func GenerateBlock(MinerNum int, Miners []Miner, coin Coin, tradeData string, bc *[]Block) {
 	var newBlock Block
 	temp := sha256.Sum256([]byte(tradeData))

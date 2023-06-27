@@ -19,37 +19,37 @@ var Dif int64 = 1
 var Miners []Miner
 
 func main() {
-	//默认难度值dif为1
-	//var Dif int64 = 1
-	//创建矿工数组Miners
-	//var Miners []Miner
-	//初始化矿工
+	// 默认难度值dif为1
+	// var Dif int64 = 1
+	// 创建矿工数组Miners
+	// var Miners []Miner
+	// 初始化矿工
 	Miners = InitMiners()
-	//添加矿工
+	// 添加矿工
 	AddMiners()
-	//创建币池数组Coins
-	//var Coins []Coin
-	//给矿工数组中的矿工添加币
+	// 创建币池数组Coins
+	// var Coins []Coin
+	// 给矿工数组中的矿工添加币
 	Coins = InitCoins(Miners)
 	for i := 0; i < len(Miners); i++ {
 		AddCoin(NewCoin(int64(i), Miners), &Coins)
 	}
-	//调用InitBlockChain函数，生成一个区块数组
-	//var BlockChain []Block
+	// 调用InitBlockChain函数，生成一个区块数组
+	// var BlockChain []Block
 	BlockChain = InitBlockChain(Miners, Coins)
-	//fmt.Println("创建第二个区块")
-	//GenerateBlock(0, Miners, Coins[0], "second block", &BlockChain)
-	//fmt.Println("创建结束")
-	//时间延迟，给出币龄
+	// fmt.Println("创建第二个区块")
+	// GenerateBlock(0, Miners, Coins[0], "second block", &BlockChain)
+	// fmt.Println("创建结束")
+	// 时间延迟，给出币龄
 	time.Sleep(5 * time.Second)
 	UpdateMiners(&Coins, &Miners)
 	PrintMiners(Miners)
 
-	//挖矿
+	// 挖矿
 	IsContinueMining()
 
-	//打印区块
-	//PrintBlockChain()
+	// 打印区块
+	// PrintBlockChain()
 
 }
 
